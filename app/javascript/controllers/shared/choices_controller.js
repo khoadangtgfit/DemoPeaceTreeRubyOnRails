@@ -9,7 +9,6 @@ export default class extends Controller {
 
   connect() {}
   selectTargetConnected() {
-    debugger;
     const baseUrl = '/admin/employees';
     Rails.ajax({
       url: `${baseUrl}?search=${this.inputTarget.value}&depart=${this.selectTarget.value}`,

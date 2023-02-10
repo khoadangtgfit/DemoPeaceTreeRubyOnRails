@@ -54,11 +54,13 @@ div[data-controller="project"]
               dt-action-buttons.text-xl-end.text-lg-start.text-md-end.text-start.d-flex.align-items-center.justify-content-end.flex-md-row.flex-column.mb-3
                 button.btn.btn-primary type="button" data-bs-toggle="modal" data-bs-target="#modalListEmployees" data-project-target="input" data-action="click->project#showTableInPopUp" data-id=@project.id
                   | Add employee
-              = render  "employees", users: @project.users
-            #new.tab-pane.fade.in[role="tabpanel"]
-              button
-                | Click!
+              = render "employees", users: @project.users
 
+            #new.tab-pane.fade.in[role="tabpanel"]
+              dt-action-buttons.text-xl-end.text-lg-start.text-md-end.text-start.d-flex.align-items-center.justify-content-end.flex-md-row.flex-column.mb-3
+                button.btn.btn-primary type="button" data-bs-toggle="modal" data-bs-target="#modalNewActivity"
+                  | Add activity
+              = render "activities", activities: @project.activities
       .col-12.order-2.order-xl-0
           =link_to "Update Project", edit_admin_project_path(@project), class:'btn btn-primary me-2 my-2'
           button.btn.btn-warning.me-2.my-2[data-bs-toggle="modal" data-bs-target="#exampleModal"]
@@ -86,11 +88,24 @@ div[data-controller="project"]
           button.btn-close[type="button" data-bs-dismiss="modal" aria-label="Close"]
         .modal-body
           label.mx-2
-            input.form-control[type="search" placeholder="Search.." data-project-target="search" data-action="input->project#showTableInPopUp"]
+            input.form-control[type="search" placeholder="Search.." data-project-target="search" data-action="input->project#search"]
           #listData
           #pagination
         .modal-footer
           button.btn.btn-secondary[type="button" data-bs-dismiss="modal"]
             | Close
-          button.btn.btn-primary[type="button"]
-            | Understood
+
+  #modalNewActivity.modal.modal-lg.fade[data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="modalNewActivity" aria-hidden="true"]
+    .modal-dialog.modal-dialog-centered
+      .modal-content
+        .modal-header
+          h5#modalNewActivity.modal-title
+            | Activities
+          button.btn-close[type="button" data-bs-dismiss="modal" aria-label="Close"]
+        .modal-body
+          label.mx-2
+            input.form-control[type="search" placeholder="Search.." data-project-target="search"]
+          = render template: "activities/new"
+        .modal-footer
+          button.btn.btn-secondary[type="button" data-bs-dismiss="modal"]
+            | Close

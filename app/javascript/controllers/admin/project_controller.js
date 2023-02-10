@@ -25,7 +25,12 @@ export default class extends Controller {
     'listProject',
     'search',
     'inputUser',
+    'inputEmployee',
   ];
+
+  connect() {
+    this.showEmployee();
+  }
 
   setUrlDelete(event) {
     const element = event.currentTarget;
@@ -35,7 +40,7 @@ export default class extends Controller {
   }
 
   showEmployee() {
-    const project_id = this.input1Target.dataset.id;
+    const project_id = this.inputEmployeeTarget.dataset.id;
     const employees = document.getElementById('employees');
     const baseUrl = '/admin/projects/';
     Rails.ajax({
@@ -49,6 +54,7 @@ export default class extends Controller {
   }
 
   showTableInPopUp() {
+    debugger;
     const project_id = this.inputTarget.dataset.id;
     const modalListEmployeesEl = document.getElementById('modalListEmployees');
     const paginationEl = modalListEmployeesEl.querySelector('#pagination');
@@ -92,6 +98,7 @@ export default class extends Controller {
   }
 
   searchByAttribute() {
+    debugger;
     const baseUrl = this.inputTarget.dataset.url;
     Rails.ajax({
       url: `${baseUrl}?search=${this.inputTarget.value}`,
@@ -99,6 +106,20 @@ export default class extends Controller {
       dataType: 'json',
       success: (res) => {
         this.listProjectTarget.innerHTML = res.html;
+      },
+    });
+  }
+
+  search() {
+    debugger;
+    const baseUrl = '/admin/projects/';
+    Rails.ajax({
+      url: `${baseUrl}?search=${this.searchTarget.value}`,
+      type: 'get',
+      dataType: 'json',
+      success: (res) => {
+        const listData = document.querySelector('listData');
+        listData.innerHTML = res.html;
       },
     });
   }

@@ -1,14 +1,12 @@
 div[data-controller="employee"]
-  .card.mx-3.pb-3
-    table.table.table-hover
+  .card.pb-3
+    table.table.table-hover.mx-3
       thead-light
         tr
           th
             | Email
           th
             | Full name
-          th
-            | Address
           th
             | Phone number
           th
@@ -24,8 +22,6 @@ div[data-controller="employee"]
               = user.email
             td
               = user.employee&.full_name
-            td
-              = user.employee&.address
             td
               = user.employee&.phone_number
             td
@@ -44,16 +40,17 @@ div[data-controller="employee"]
                   = link_to admin_employee_path(user)
                     = image_pack_tag 'show-icon.svg'
     == pagy_bootstrap_nav(@pagy) if @pagy.pages > 1
-    #exampleModal.modal.fade[tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"]
-      .modal-dialog
-        .modal-content
-          .modal-header
-            h5#exampleModalLabel.modal-title
-              | Message
-            button.btn-close[type="button" data-bs-dismiss="modal" aria-label="Close"]
-          .modal-body
-            |  Are you sure?
-          .modal-footer
-            button.btn.btn-secondary[type="button" data-bs-dismiss="modal"]
-              | Close
-            = link_to 'Delete', '', method: :delete, class: 'btn btn-warning', id:'buttonDelete'
+
+  #exampleModal.modal.fade[tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"]
+    .modal-dialog
+      .modal-content
+        .modal-header
+          h5#exampleModalLabel.modal-title
+            | Message
+          button.btn-close[type="button" data-bs-dismiss="modal" aria-label="Close"]
+        .modal-body
+          | Are you sure?
+        .modal-footer
+          button.btn.btn-secondary[type="button" data-bs-dismiss="modal"]
+            | Close
+          = link_to 'Delete', '', method: :delete, class: 'btn btn-warning', id:'buttonDelete'

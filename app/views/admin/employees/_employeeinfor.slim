@@ -54,9 +54,9 @@
                 | Employee
             li.mb-3
               span.fw-bold.me-2
-                | Tax id:
+                | Address:
               span
-                | Tax-8965
+                = user.employee.address
             li.mb-3
               span.fw-bold.me-2
                 | Contact:
@@ -64,14 +64,9 @@
                 = user.employee.phone_number
             li.mb-3
               span.fw-bold.me-2
-                | Languages:
+                | Department:
               span
-                | French
-            li.mb-3
-              span.fw-bold.me-2
-                | Country:
-              span
-                | England
+                = user.employee.department_id
           .d-flex.justify-content-center.pt-3
             = link_to 'Edit', edit_admin_employee_path(user), class: 'btn btn-primary'
   .col-xl-8.col-lg-7.col-md-7.order-0.order-md-1

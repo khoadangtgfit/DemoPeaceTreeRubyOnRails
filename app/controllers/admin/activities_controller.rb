@@ -1,4 +1,8 @@
 class Admin::ActivitiesController < Admin::BaseController
+  def index
+    # @users =
+  end
+
   def new
     @activity = Activity.new
   end
@@ -15,6 +19,6 @@ class Admin::ActivitiesController < Admin::BaseController
   private
 
   def activity_params
-    params.require(:activities).permit(:activity_name, :activity_time, :activity_description, arr_user: [])
+    params.require(:activities).permit(:activity_name, :activity_time, :activity_description)
   end
 end

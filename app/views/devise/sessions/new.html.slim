@@ -30,6 +30,8 @@
 
           .form-actions.mb-3
             = f.button :submit, 'Sign in', class: 'btn btn-primary w-100'
+            = link_to 'Forgot password?', new_user_password_path
+
           .form-links.mb-3.text-center
             span
               | New on our platform?&nbsp;

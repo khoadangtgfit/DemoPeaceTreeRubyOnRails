@@ -24,6 +24,13 @@
           label_html: { class: 'form-label mb-3' },
           wrapper_html: { class: 'mb-3' },
           placeholder: '8412345678'
+        = f.input :department_id,
+          as: :select,
+          collection: Department.all,
+          prompt: 'Select department',
+          required: true,
+          label_html: { class: 'form-label mb-3' },
+          wrapper_html: { class: 'mb-3' }
       .form-actions.mb-3
         = f.button :submit, 'Create', class: 'btn btn-primary w-100 mb-3'
         = link_to 'Logout', destroy_user_session_path, method: :delete, class: 'btn btn-warning w-100'

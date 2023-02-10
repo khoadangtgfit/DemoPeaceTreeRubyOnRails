@@ -20,7 +20,7 @@ class ApplicationController < ActionController::Base
   end
 
   def redirect_to_employee
-    redirect_to new_employee_path, notice: 'You must input infor' if employee?(current_user)
+    redirect_to new_employee_path, notice: 'You must input infor' if !current_user.has_role?(:admin) && current_user.employee.blank?
   end
 
   def render_table(path, local)

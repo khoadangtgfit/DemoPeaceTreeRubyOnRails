@@ -1,0 +1,15 @@
+/  = simple_form_for activity, url: add_activities_admin_project_path(activity) do |f|
+/   = f.error_notification
+/   .form-inputs
+/     .row
+/       .col-md-5.col-12.mb-4.mx-4
+/         = f.input :name,
+/           autofocus: true,
+/           required: true,
+/           input_html: { autocomplete: 'name' },
+/           label_html: { class: 'form-label mb-3' },
+/           wrapper_html: { class: 'mb-3' },
+/           placeholder: 'Name'
+
+/     .form-actions.mb-3.mx-4
+/       = f.button :submit, 'Create', class: 'btn btn-primary'

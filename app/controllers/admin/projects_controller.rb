@@ -6,20 +6,19 @@ class Admin::ProjectsController < Admin::BaseController
     @pagy, @projects = pagy(@projects)
     respond_to do |format|
       format.html
-      format.json { render json: { html: render_table('admin/projects/employees', { users: @project.users }) } }
+      format.json { render json: { html: render_table('admin/projects/table_projects', { projects: @projects }) } }
     end
   end
 
-  def show
-    @activity = Activity.new
-  end
+  def show; end
 
   def new
     @project = Project.new
   end
 
   def create
-    if Project.create(project_params)
+    @project = Project.new(project_params)
+    if @project.save
       flash[:notice] = t('common.create.success', model: @project)
       redirect_to admin_projects_path
     else
@@ -50,7 +49,7 @@ class Admin::ProjectsController < Admin::BaseController
     if @project.users.delete(params[:user_id])
       flash[:notice] = t('common.destroy.success', model: @project.project_name)
     else
-      flash[:alert] = @user.errors.full_messages.to_sentence
+      flash[:alert] = @project.errors.full_messages.to_sentence
     end
     redirect_to admin_project_path
   end
@@ -63,6 +62,11 @@ class Admin::ProjectsController < Admin::BaseController
     else
       flash[:alert] = 'add employee failed'
     end
+  end
+
+  def add_activities
+    @activity = Activity.create(activity_params)
+    @projects.activites << @activity
   end
 
   def show_employees
@@ -89,5 +93,9 @@ class Admin::ProjectsController < Admin::BaseController
 
   def project_params
     params.require(:project).permit(:project_name, :project_type, :description, :address, :area, :status)
+  end
+
+  def activity_params
+    params.require(:activities).permit(:name)
   end
 end
